@@ -1,30 +1,52 @@
-# Week-5 RISC-V Tapeout Program: OpenROAD Flow Setup and Physical Design
+# **Week-5 RISC-V Tapeout Program: OpenROAD Flow Setup and Physical Design**
 
 <div align="center">
 
-![OpenROAD Logo](https://openroad.readthedocs.io/en/latest/_static/logo.png)
+<img src="./screenshots/setup/openroad_logo.jpeg" alt="OpenROAD Logo" width="250" height="50"/>
 
-**A Beginner-Friendly Guide to Physical Design Implementation**
 
-[![GitHub](https://img.shields.io/badge/GitHub-OpenROAD-blue)](https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts)
-[![License](https://img.shields.io/badge/License-BSD--3-green)](https://opensource.org/licenses/BSD-3-Clause)
-
-</div>
+**Previous Week Repository** --> [click_here](https://github.com/Meenakshi-2627/Week-4_RISC-V_Tapeout_Program)
 
 ---
 
-## Table of Contents
+# Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [Understanding the Physical Design Flow](#2-understanding-the-physical-design-flow)
-3. [OpenROAD Installation](#3-openroad-installation)
-4. [Running the Flow: Floorplanning](#4-running-the-flow-floorplanning)
-5. [Running the Flow: Placement](#5-running-the-flow-placement)
-6. [Visualizing Results](#6-visualizing-results)
-7. [Troubleshooting Common Errors](#7-troubleshooting-common-errors)
-8. [Understanding Output Files](#8-understanding-output-files)
-9. [Deliverables Checklist](#9-deliverables-checklist)
-10. [Additional Resources](#10-additional-resources)
+ **1. Introduction**  
+    [Overview](#overview)  
+    [Learning Objectives](#learning-objectives)  
+    [Prerequisites](#prerequisites)  
+
+ **2. Physical Design Flow**  
+    [What is Physical Design?](#what-is-physical-design)  
+    [OpenROAD Flow Stages](#openroad-flow-stages)  
+
+ **3. OpenROAD Installation**   
+    [System Requirements](#system-requirements)  
+    [Git Cloning & Dependencies](#git-cloning--dependencies)  
+    [Building OpenROAD](#building-openroad)  
+
+ **4. Floorplanning**   
+    [Overview & Key Metrics](#overview--key-metrics)  
+    [Running Floorplan Stage](#running-floorplan-stage)  
+    [Understanding Outputs](#understanding-outputs)  
+
+ **5. Placement**   
+    [Overview & Goals](#overview--goals)  
+    [Running Placement Stage](#running-placement-stage)  
+    [Understanding Outputs](#understanding-outputs-1)  
+
+ **6. Visualization**  
+    [GUI for Floorplan & Placement](#gui-for-floorplan--placement)  
+
+ **7. Error Resolving**    
+      [Troubleshooting & Common Errors](#troubleshooting--common-errors)  
+
+ **8. Summary of commands used**  
+     [Quick Reference Commands](#quick-reference-commands)  
+
+ **9. Conclusion of Week-5**  
+     [Conclusion](#conclusion)
+</div>
 
 ---
 
@@ -40,26 +62,6 @@ Welcome to Week 5 of the RISC-V Tapeout Program! This week marks an exciting tra
 - ✅ Execute **Placement** to position standard cells optimally
 - ✅ Visualize your design at each stage
 
-> **⚠️ Important Note:** This week focuses **ONLY** on Floorplan and Placement stages. Do not proceed to Clock Tree Synthesis, Routing, or later stages yet.
-
----
-
-### Learning Objectives
-
-By completing this task, you will:
-
-- **Understand Physical Design**: Learn how digital logic transforms into manufacturable silicon layout
-- **Master OpenROAD Tools**: Gain hands-on experience with industry-standard open-source EDA tools
-- **Apply Design Constraints**: See how area, power, and timing goals affect physical implementation
-- **Analyze Trade-offs**: Understand placement's impact on congestion, delay, and routability
-- **Build Foundation**: Prepare for complete ASIC design flow in upcoming weeks
-
-**Why This Matters:**
-
-After understanding how transistors create timing delays (Week 4), you now see how those circuits are physically realized. Floorplanning and placement directly affect:
-- **Timing**: Cell proximity impacts wire delay
-- **Power**: Shorter wires = lower power consumption
-- **Manufacturability**: Proper placement enables successful routing
 
 ---
 
@@ -101,11 +103,11 @@ nproc
 
 **Physical Design** is the process of transforming a logical circuit description (RTL - Register Transfer Level) into a physical layout that can be manufactured on silicon.
 
-```
-RTL Code → Synthesis → Floorplan → Placement → CTS → Routing → Signoff → GDSII
-```
 
-Think of it like building a house:
+`RTL Code` → `Synthesis` → `Floorplan` → `Placement` → `CTS` → `Routing` → `Signoff` → `GDSII`
+
+
+**Explanation**
 - **RTL** = Architectural blueprint
 - **Synthesis** = Choosing building materials (logic gates)
 - **Floorplan** = Defining plot boundaries and room locations
@@ -171,10 +173,6 @@ The OpenROAD flow consists of 6 major stages. **This week focuses on stages 2 an
 cd ~
 mkdir -p OpenROAD
 cd OpenROAD
-
-# Verify location
-pwd
-# Expected: /home/<your-username>/OpenROAD
 ```
 
 #### Step 2: Clone Repository
